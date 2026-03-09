@@ -1,142 +1,104 @@
-import { MapPin, Phone, Mail, Facebook, Twitter, Linkedin } from 'lucide-react';
+import { Link } from "wouter";
+import { Mail, Phone, MapPin } from "lucide-react";
+
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
-    <footer className="bg-gradient-to-r from-[#0D7377] via-[#14919B] to-[#0D7377] text-white relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#FFD60A] rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#FF6B35] rounded-full blur-3xl"></div>
-      </div>
-
-      <div className="container relative z-10">
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 py-16 border-b border-white border-opacity-20">
-          {/* Brand */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#0D7377] to-[#14919B] flex items-center justify-center">
-              <span className="text-white font-bold text-xl">AC</span>
-            </div>
-              <div>
-                <h3 className="font-bold text-lg">Ashique Cyber Hub</h3>
-                <p className="text-sm text-[#F0F9F8]">Cyber cafe | Digital Services Center</p>
+    <footer className="bg-[#1e3a5f] text-white">
+      <div className="container mx-auto px-4 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          {/* Company Info */}
+          <div>
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-10 h-10 bg-[#d97706] rounded-lg flex items-center justify-center">
+                <span className="font-display text-lg font-bold">BC</span>
               </div>
+              <span className="font-display text-xl font-bold">BuildCore</span>
             </div>
-            <p className="text-[#F0F9F8] text-sm leading-relaxed">
-              Your trusted partner for providing Aadhaar, PAN, online forms, printing, scanning, and government services with fast and friendly support.
+            <p className="text-gray-300 text-sm leading-relaxed">
+              Building the Future with Strength and Trust. Delivering high-quality construction solutions for residential, commercial, and industrial projects.
             </p>
           </div>
 
           {/* Quick Links */}
-          <div className="space-y-4">
-            <h4 className="font-bold text-lg">Quick Links</h4>
+          <div>
+            <h4 className="font-display font-bold text-lg mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              <li>
-                <button
-                  onClick={() => {
-                    const element = document.getElementById('services');
-                    if (element) element.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="text-[#F0F9F8] hover:text-[#FFD60A] transition-colors"
-                >
-                  Services
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => {
-                    const element = document.getElementById('about');
-                    if (element) element.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="text-[#F0F9F8] hover:text-[#FFD60A] transition-colors"
-                >
-                  About Us
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => {
-                    const element = document.getElementById('contact');
-                    if (element) element.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="text-[#F0F9F8] hover:text-[#FFD60A] transition-colors"
-                >
-                  Contact
-                </button>
-              </li>
-              <li>
-                <a href="#" className="text-[#F0F9F8] hover:text-[#FFD60A] transition-colors">
-                  Privacy Policy
-                </a>
-              </li>
+              {[
+                { href: "/", label: "Home" },
+                { href: "/about", label: "About Us" },
+                { href: "/services", label: "Services" },
+                { href: "/projects", label: "Projects" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href}>
+                    <a className="text-gray-300 hover:text-[#d97706] transition-colors text-sm">
+                      {link.label}
+                    </a>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Services */}
-          <div className="space-y-4">
-            <h4 className="font-bold text-lg">Popular Services</h4>
-            <ul className="space-y-2 text-sm">
-              <li className="text-[#F0F9F8] hover:text-[#FFD60A] transition-colors cursor-pointer">
-                Caste Certificate
-              </li>
-              <li className="text-[#F0F9F8] hover:text-[#FFD60A] transition-colors cursor-pointer">
-                Income Certificate
-              </li>
-              <li className="text-[#F0F9F8] hover:text-[#FFD60A] transition-colors cursor-pointer">
-                Passport Sewa
-              </li>
-              <li className="text-[#F0F9F8] hover:text-[#FFD60A] transition-colors cursor-pointer">
-                Online Form Apply
-              </li>
-              <li className="text-[#F0F9F8] hover:text-[#FFD60A] transition-colors cursor-pointer">
-                Railway Ticket
-              </li>
+          <div>
+            <h4 className="font-display font-bold text-lg mb-4">Services</h4>
+            <ul className="space-y-2">
+              {[
+                "Residential Construction",
+                "Commercial Construction",
+                "Industrial Construction",
+                "Renovation & Remodeling",
+              ].map((service) => (
+                <li key={service}>
+                  <span className="text-gray-300 text-sm">{service}</span>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Contact Info */}
-          <div className="space-y-4">
-            <h4 className="font-bold text-lg">Contact Info</h4>
+          <div>
+            <h4 className="font-display font-bold text-lg mb-4">Contact</h4>
             <div className="space-y-3">
-              <div className="flex gap-3">
-                <MapPin size={20} className="flex-shrink-0 mt-1" />
-                <div className="text-sm">
-                  <p className="text-[#F0F9F8]">Bendusar Buzurg</p>
-                  <p className="text-[#F0F9F8]">Purab Tola, Siwan</p>
-                </div>
+              <div className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-[#d97706] flex-shrink-0 mt-0.5" />
+                <span className="text-gray-300 text-sm">
+                  123 Business Park, City Center, India
+                </span>
               </div>
-              <div className="flex gap-3">
-                <Phone size={20} className="flex-shrink-0" />
-                <p className="text-[#F0F9F8] text-sm">+91 74858 97296</p>
+              <div className="flex items-center gap-3">
+                <Phone className="w-5 h-5 text-[#d97706] flex-shrink-0" />
+                <a href="tel:+919876543210" className="text-gray-300 hover:text-[#d97706] transition-colors text-sm">
+                  +91 98765 43210
+                </a>
               </div>
-              <div className="flex gap-3">
-                <Mail size={20} className="flex-shrink-0" />
-                <p className="text-[#F0F9F8] text-sm">ashiquea056@gmail.com</p>
+              <div className="flex items-center gap-3">
+                <Mail className="w-5 h-5 text-[#d97706] flex-shrink-0" />
+                <a href="mailto:info@buildcoreconstruction.com" className="text-gray-300 hover:text-[#d97706] transition-colors text-sm">
+                  info@buildcore.com
+                </a>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Footer */}
-        <div className="py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[#F0F9F8] text-sm">
-            &copy; {currentYear} Ashique Cyber Hub. All rights reserved.
-          </p>
-          
-          {/* <div className="flex gap-4">
-            <button className="w-10 h-10 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 flex items-center justify-center transition-all">
-              <Facebook size={18} />
-            </button>
-            <button className="w-10 h-10 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 flex items-center justify-center transition-all">
-              <Twitter size={18} />
-            </button>
-            <button className="w-10 h-10 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 flex items-center justify-center transition-all">
-              <Linkedin size={18} />
-            </button>
-          </div> */}
+        {/* Divider */}
+        <div className="border-t border-gray-700 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <p className="text-gray-400 text-sm">
+              © 2026 BuildCore Construction Pvt. Ltd. All rights reserved.
+            </p>
+            <div className="flex gap-6 mt-4 md:mt-0">
+              <a href="#" className="text-gray-400 hover:text-[#d97706] transition-colors text-sm">
+                Privacy Policy
+              </a>
+              <a href="#" className="text-gray-400 hover:text-[#d97706] transition-colors text-sm">
+                Terms of Service
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

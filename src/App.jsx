@@ -1,22 +1,40 @@
-import './App.css'
-import About from './components/about'
-import Header from './components/header' 
-import Footer from './components/footer'
-import Services from './components/services'
-import Hero from './components/hero'
-import Contact from './components/contact'
-function App() {
 
+import { Route, Switch } from "wouter";
+
+import Home from "./components/hero";
+import About from "./components/about";
+import Services from "./components/services";
+import Projects from "./components/Projects";
+import Blog from "./components/Blog";
+import Contact from "./components/contact";
+
+
+function Router() {
   return (
-    <>
-    <Header/>
-    <Hero/>
-    <Services/>
-    <About/>  
-    <Contact/>
-    <Footer/>
-    </>
-  )
+    <Switch>
+      <Route path={"/"} component={Home} />
+      <Route path={"/about"} component={About} />
+      <Route path={"/services"} component={Services} />
+      <Route path={"/projects"} component={Projects} />
+      <Route path={"/blog"} component={Blog} />
+       <Route path={"/contact"} component={Contact} />
+     
+      
+    </Switch>
+  );
 }
 
-export default App
+// NOTE: About Theme
+// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
+//   to keep consistent foreground/background color across components
+// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
+
+function App() {
+  return (
+<>
+          <Router />
+</>
+  );
+}
+
+export default App;

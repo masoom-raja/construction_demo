@@ -1,93 +1,99 @@
-import { useState } from 'react';
-import { Menu, X, Phone, MapPin } from 'lucide-react';
+import { useState } from "react";
+import { Link } from "wouter";
+import { Menu, X,Phone } from "lucide-react";
+
+
 
 export default function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setMobileMenuOpen(false);
-    }
-  };
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
+    { href: "/services", label: "Services" },
+    { href: "/projects", label: "Projects" },
+    { href: "/blog", label: "Blog" },
+    { href: "/contact", label: "Contact" },
+  ];
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-md border-b-4 border-[#0D7377]">
-      <div className="container">
-        <div className="flex items-center justify-between py-4">
+    <nav className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-20">
 
           {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#0D7377] to-[#14919B] flex items-center justify-center">
-              <span className="text-white font-bold text-xl">AC</span>
-               {/* <h1 className="text-lg font-bold text-[#0D7377]">Ashique Cyber Hub</h1> */}
+          <Link href="/" className="flex items-center gap-2 group">
+            <div className="w-10 h-10 bg-gradient-to-br from-[#1e3a5f] to-[#0f172a] rounded-lg flex items-center justify-center">
+              <span className="text-white text-lg font-bold">BC</span>
             </div>
-             <h1 className="text-lg font-bold text-[#0D7377] block sm:hidden">Ashique Cyber Hub</h1>
-            <div className="hidden sm:block">
-              <h1 className="text-lg font-bold text-[#0D7377]">Ashique Cyber Hub</h1>
-              <p className="text-xs text-[#666666]">Cyber cafe | Digital Services Center</p>
-            </div>
-          </div>
+            <span className="text-lg font-bold text-[#1e3a5f] hidden sm:inline">
+              BuildCore
+            </span>
+          </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            <button onClick={() => scrollToSection('services')} className="text-[#1A1A1A] hover:text-[#0D7377] font-medium transition-colors">
-              Services
-            </button>
-            <button onClick={() => scrollToSection('about')} className="text-[#1A1A1A] hover:text-[#0D7377] font-medium transition-colors">
-              About
-            </button>
-            <button onClick={() => scrollToSection('contact')} className="text-[#1A1A1A] hover:text-[#0D7377] font-medium transition-colors">
-              Contact
-            </button>
-          </nav>
-
-          {/* Contact Info Desktop */}
-          <div className="hidden lg:flex items-center gap-6">
-            <div className="flex items-center gap-2 text-[#0D7377]">
-              <Phone size={18} />
-              <span className="text-sm font-semibold">+91 74858 97296</span>
-            </div>
-            <button onClick={() => scrollToSection('contact')} className="btn-primary">
-              Get in Touch
-            </button>
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-gray-700 hover:text-[#d97706] transition-colors duration-300 font-medium text-sm"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2 hover:bg-[#F0F9F8] rounded-lg transition-colors"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? (
-              <X size={24} className="text-[#0D7377]" />
-            ) : (
-              <Menu size={24} className="text-[#0D7377]" />
-            )}
-          </button>
+          {/* CTA Button & Mobile Menu */}
+          <div className="flex items-center gap-4">
 
+            {/* Desktop Button */}
+            <button className="hidden sm:inline-flex bg-[#d97706] hover:bg-[#b45309] text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                             <Phone className="w-5 h-5 text-[#fffdfa] flex-shrink-0" />
+
+              <a href="tel:+919876543210" className="text-white hover:text-[#ffffff] transition-colors text-sm">
+                  +91 98765 43210
+                </a>
+            </button>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              {isOpen ? (
+                <X className="w-6 h-6 text-gray-700" />
+              ) : (
+                <Menu className="w-6 h-6 text-gray-700" />
+              )}
+            </button>
+
+          </div>
         </div>
 
         {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <nav className="md:hidden pb-4 border-t border-[#E8F1F0]">
-            <div className="flex flex-col gap-3 pt-4">
-              <button onClick={() => scrollToSection('services')} className="text-left px-4 py-2 hover:bg-[#F0F9F8] rounded-lg">
-                Services
-              </button>
-              <button onClick={() => scrollToSection('about')} className="text-left px-4 py-2 hover:bg-[#F0F9F8] rounded-lg">
-                About
-              </button>
-              <button onClick={() => scrollToSection('contact')} className="text-left px-4 py-2 hover:bg-[#F0F9F8] rounded-lg">
-                Contact
-              </button>
-              <button onClick={() => scrollToSection('contact')} className="btn-primary w-full mt-2">
-                Get Started
-              </button>
-            </div>
-          </nav>
+        {isOpen && (
+          <div className="md:hidden pb-4 border-t border-gray-200">
+
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-[#d97706] transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
+
+            <button className="w-full mt-4 bg-[#d97706] hover:bg-[#b45309] text-white py-2 rounded-lg font-medium">
+              Get Quote
+            </button>
+
+          </div>
         )}
+
       </div>
-    </header>
+    </nav>
   );
 }
