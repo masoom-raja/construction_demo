@@ -1,5 +1,5 @@
-
-import { Route, Switch } from "wouter";
+import { Route, Switch, useLocation } from "wouter";
+import { useEffect } from "react";
 
 import Home from "./components/hero";
 import About from "./components/about";
@@ -8,6 +8,15 @@ import Projects from "./components/Projects";
 import Blog from "./components/Blog";
 import Contact from "./components/contact";
 
+function ScrollToTop() {
+  const [location] = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  return null;
+}
 
 function Router() {
   return (
@@ -17,23 +26,17 @@ function Router() {
       <Route path={"/services"} component={Services} />
       <Route path={"/projects"} component={Projects} />
       <Route path={"/blog"} component={Blog} />
-       <Route path={"/contact"} component={Contact} />
-     
-      
+      <Route path={"/contact"} component={Contact} />
     </Switch>
   );
 }
 
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
-
 function App() {
   return (
-<>
-          <Router />
-</>
+    <>
+      <ScrollToTop />
+      <Router />
+    </>
   );
 }
 
